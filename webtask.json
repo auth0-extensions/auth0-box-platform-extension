@@ -9,7 +9,7 @@
   "logoUrl": "https://cdn.rawgit.com/auth0-extensions/auth0-box-serverless-extension/master/media/box.svg",
   "initialUrlPath": "/admins/login",
   "uninstallConfirmMessage": "Do you really want to uninstall this extension? Doing so will also remove the rule and the token endpoint.",
-  "repository": "https://github.com/auth0-extensions/auth0-box-serverless",
+  "repository": "https://github.com/auth0-extensions/auth0-box-serverless-extension",
   "keywords": [
     "auth0",
     "extension",
