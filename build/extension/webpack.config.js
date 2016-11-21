@@ -9,15 +9,19 @@ module.exports = externalModules.then((externals) => {
   externals.compatible.ejs = true;
   externals.compatible.express = true;
   externals.compatible['express-jwt'] = true;
-  externals.compatible.lodash = true;
+  externals.compatible.lodash = 'lodash@3.10.1';
+  externals.compatible['tough-cookie'] = 'tough-cookie@2.2.2';
   externals.compatible.morgan = true;
   externals.compatible.qs = true;
   externals.compatible.superagent = true;
   externals.compatible.winston = true;
   externals.compatible.auth0 = 'auth0@2.1.0';
   externals.compatible.jsonwebtoken = true;
+  externals.compatible.request = 'request@2.67.0';
+  externals.compatible['mime-db'] = true;
   externals.compatible['body-parser'] = true;
   externals.compatible['webtask-tools'] = true;
+  externals.compatible['auth0-extension-tools'] = true;
 
   // Transform to commonjs.
   Object.keys(externals.compatible).forEach(k => {
@@ -26,7 +30,6 @@ module.exports = externalModules.then((externals) => {
     } else {
       externals.compatible[k] = `commonjs ${externals.compatible[k]}`;
     }
-    console.log('External:', externals.compatible[k]);
   });
 
   return {

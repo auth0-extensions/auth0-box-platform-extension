@@ -6,7 +6,7 @@
   "description": "Box Extension.",
   "type": "application",
   "docsUrl": "https://auth0.com/docs/extensions/box-serverless",
-  "logoUrl": "https://cdn.auth0.com/extensions/auth0-box-serverless/assets/logo.svg",
+  "logoUrl": "https://raw.githubusercontent.com/auth0-extensions/auth0-box-serverless-extension/master/media/box.svg",
   "initialUrlPath": "/admins/login",
   "uninstallConfirmMessage": "Do you really want to uninstall this extension? Doing so will also remove the rule and the token endpoint.",
   "repository": "https://github.com/auth0-extensions/auth0-box-serverless",
@@ -41,6 +41,11 @@
     },
     "BOX_SIGNING_CERT": {
       "description": "The base64 encoded signing certificate.",
+      "required": true,
+      "type": "password"
+    },
+    "BOX_SIGNING_CERT_PASSWORD": {
+      "description": "The password for your singing certificate (optional).",
       "required": true,
       "type": "password"
     },
