@@ -6,7 +6,7 @@
   "description": "Box Extension.",
   "type": "application",
   "docsUrl": "https://auth0.com/docs/extensions/box-serverless",
-  "logoUrl": "https://raw.githubusercontent.com/auth0-extensions/auth0-box-serverless-extension/master/media/box.svg",
+  "logoUrl": "https://cdn.rawgit.com/auth0-extensions/auth0-box-serverless-extension/master/media/box.svg",
   "initialUrlPath": "/admins/login",
   "uninstallConfirmMessage": "Do you really want to uninstall this extension? Doing so will also remove the rule and the token endpoint.",
   "repository": "https://github.com/auth0-extensions/auth0-box-serverless",
@@ -24,19 +24,23 @@
   "secrets": {
     "BOX_CLIENT_ID": {
       "description": "Your Box Client ID",
+      "example": "i3ja4fpame94fnwapeffqlenepep",
       "required": true
     },
     "BOX_CLIENT_SECRET": {
       "description": "Your Box Client Secret",
+      "example": "mZj2fpwpwbbiepepBofeappfoe9929294949",
       "required": true,
       "type": "password"
     },
     "BOX_ENTERPRISE_ID": {
       "description": "Your Box Enterprise ID",
+      "example": "111111",
       "required": true
     },
     "BOX_PUBLIC_KEY_ID": {
       "description": "The ID of your Public Key in Box",
+      "example": "xp39apxie",
       "required": true
     },
     "BOX_SIGNING_CERT": {
@@ -46,7 +50,8 @@
     },
     "BOX_SIGNING_CERT_PASSWORD": {
       "description": "The password for your singing certificate (optional).",
-      "required": true,
+      "example": "my-pass",
+      "required": false,
       "type": "password"
     },
     "AUDIENCE": {
