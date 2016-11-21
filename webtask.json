@@ -1,0 +1,56 @@
+{
+  "title": "Box Serverless",
+  "name": "auth0-box-serverless",
+  "version": "1.0.0",
+  "author": "auth0",
+  "description": "Box Extension.",
+  "type": "application",
+  "docsUrl": "https://auth0.com/docs/extensions/box-serverless",
+  "logoUrl": "https://cdn.auth0.com/extensions/auth0-box-serverless/assets/logo.svg",
+  "initialUrlPath": "/admins/login",
+  "uninstallConfirmMessage": "Do you really want to uninstall this extension? Doing so will also remove the rule and the token endpoint.",
+  "repository": "https://github.com/auth0-extensions/auth0-box-serverless",
+  "keywords": [
+    "auth0",
+    "extension",
+    "github"
+  ],
+  "auth0": {
+    "createClient": true,
+    "onInstallPath": "/.extensions/on-install",
+    "onUninstallPath": "/.extensions/on-uninstall",
+    "scopes": "read:clients delete:clients read:rules create:rules update:rules delete:rules"
+  },
+  "secrets": {
+    "BOX_CLIENT_ID": {
+      "description": "Your Box Client ID",
+      "required": true
+    },
+    "BOX_CLIENT_SECRET": {
+      "description": "Your Box Client Secret",
+      "required": true,
+      "type": "password"
+    },
+    "BOX_ENTERPRISE_ID": {
+      "description": "Your Box Enterprise ID",
+      "required": true
+    },
+    "BOX_PUBLIC_KEY_ID": {
+      "description": "The ID of your Public Key in Box",
+      "required": true
+    },
+    "BOX_SIGNING_CERT": {
+      "description": "The base64 encoded signing certificate.",
+      "required": true,
+      "type": "password"
+    },
+    "AUDIENCE": {
+      "description": "If you're using a client, then this is your Auth0 Client ID. For a Resource Server, you'll use the identifier (eg: urn:my-api)",
+      "required": true
+    },
+    "SECRET": {
+      "description": "If you're using a client with HS256, then you would need to enter your Auth0 Client Secret here.",
+      "required": false
+    }
+  }
+}
