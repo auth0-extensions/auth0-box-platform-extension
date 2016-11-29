@@ -27,7 +27,7 @@ module.exports = (configProvider) => {
     audience: 'urn:box-serverless',
     rta: config('AUTH0_RTA'),
     domain: config('AUTH0_DOMAIN'),
-    baseUrl: config('WT_URL'),
+    baseUrl: config('PUBLIC_WT_URL'),
     clientName: 'Box Serverless Extension',
     urlPrefix: '/admins',
     sessionStorageKey: 'box-serverless:apiToken',

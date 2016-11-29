@@ -20,8 +20,20 @@ module.exports = externalModules.then((externals) => {
   externals.compatible.request = 'request@2.67.0';
   externals.compatible['mime-db'] = true;
   externals.compatible['body-parser'] = true;
+  externals.compatible.auth0 = 'auth0@2.4.0';
+  externals.compatible['auth0-oauth2-express'] = 'auth0-oauth2-express@1.1.5';
+  externals.compatible.nconf = true;
+  externals.compatible['auth0-extension-express-tools'] = 'auth0-extension-express-tools@1.0.1';
+  externals.compatible['lru-memoizer'] = 'lru-memoizer@1.10.0';
+  externals.compatible['auth0-extension-tools'] = 'auth0-extension-tools@1.0.0';
+  externals.compatible['node-uuid'] = true;
+  externals.compatible.jade = true;
+  externals.compatible.jsonwebtoken = true;
+  externals.compatible.debug = true;
+  externals.compatible['deep-extend'] = true;
+  externals.compatible['body-parser'] = true;
+  externals.compatible['mime-types'] = true;
   externals.compatible['webtask-tools'] = true;
-  externals.compatible['auth0-extension-tools'] = true;
 
   // Transform to commonjs.
   Object.keys(externals.compatible).forEach(k => {

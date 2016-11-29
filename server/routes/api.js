@@ -14,7 +14,7 @@ export default () => {
       credentialsRequired: true,
       secret: config('EXTENSION_SECRET'),
       audience: 'urn:box-serverless',
-      baseUrl: config('WT_URL')
+      baseUrl: config('PUBLIC_WT_URL')
     }),
     middlewares.managementApiClient({
       domain: config('AUTH0_DOMAIN')
