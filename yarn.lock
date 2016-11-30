@@ -2319,7 +2319,7 @@ express-conditional-middleware@^2.0.0:
   dependencies:
     once "1.4.0"
 
-express-jwt@^3.1.0, express-jwt@^3.4.0:
+express-jwt@^3.1.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/express-jwt/-/express-jwt-3.4.0.tgz#e6fe8730e61da81a8deab64680154ae46c0028cc"
   dependencies:
@@ -2327,6 +2327,14 @@ express-jwt@^3.1.0, express-jwt@^3.4.0:
     express-unless "^0.3.0"
     jsonwebtoken "^5.0.0"
     lodash.set "^4.0.0"
+
+express-jwt@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/express-jwt/-/express-jwt-3.1.0.tgz#2d7ef5982cd9215786fa3059d8c6debaa40185b7"
+  dependencies:
+    async "^0.9.0"
+    express-unless "^0.3.0"
+    jsonwebtoken "^5.0.0"
 
 express-unless@^0.3.0:
   version "0.3.0"
@@ -3661,7 +3669,7 @@ jwa@^1.1.4:
     ecdsa-sig-formatter "1.0.7"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.1.1:
+jwks-rsa@^1.1.1, jwks-rsa@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.1.1.tgz#f9ae815f4a5923e0745f7739bf60c4e0e6012a52"
   dependencies:

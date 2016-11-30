@@ -4,8 +4,9 @@ import { Router } from 'express';
 import { urlHelpers, middlewares } from 'auth0-extension-express-tools';
 
 import config from '../lib/config';
-import { getAppUserToken } from '../lib/box';
+import getAppUserToken from '../lib/box';
 import { getClient, getResourceServer } from '../lib/queries';
+import authenticateUser from '../lib/middlewares/authenticateUser';
 
 export default () => {
   const api = Router();
@@ -35,9 +36,10 @@ export default () => {
       .catch(next);
   });
 
-  api.get('/token', (req, res, next) => {
+  const auth = authenticateUser(config('AUTH0_DOMAIN'), config('AUDIENCE'), config('SECRET'), config('SECRET_ENCODED'));
+  api.post('/token', auth, (req, res, next) => {
     getAppUserToken(req.user, req.headers.authorization.split(' ')[1])
-      .then(res.json)
+      .then(token => res.json(token))
       .catch(next);
   });
   return api;

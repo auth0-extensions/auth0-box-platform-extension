@@ -27,7 +27,6 @@ gulp.task('run', () => {
         path.join(__dirname, '../build/'),
         path.join(__dirname, '../client/'),
         path.join(__dirname, '../node_modules/'),
-        path.join(__dirname, '../server/config.json'),
         path.join(__dirname, '../tests/')
       ]
     });

@@ -25,7 +25,7 @@ module.exports = (configProvider) => {
   app.use(routes.dashboardAdmins({
     secret: config('EXTENSION_SECRET'),
     audience: 'urn:box-serverless',
-    rta: config('AUTH0_RTA'),
+    rta: config('AUTH0_RTA').replace('https://', ''),
     domain: config('AUTH0_DOMAIN'),
     baseUrl: config('PUBLIC_WT_URL'),
     clientName: 'Box Serverless Extension',

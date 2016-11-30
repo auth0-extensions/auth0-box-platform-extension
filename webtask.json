@@ -55,12 +55,29 @@
       "type": "password"
     },
     "AUDIENCE": {
-      "description": "If you're using a client, then this is your Auth0 Client ID. For a Resource Server, you'll use the identifier (eg: urn:my-api)",
+      "description": "Your Auth0 Client ID",
       "required": true
     },
     "SECRET": {
       "description": "If you're using a client with HS256, then you would need to enter your Auth0 Client Secret here.",
       "required": false
+    },
+    "SECRET_ENCODED": {
+      "description": "Is the signing certificate base64 encoded?",
+      "type": "select",
+      "required": false,
+      "default": true,
+      "allowMultiple": false,
+      "options": [
+        {
+          "value": true,
+          "text": "Yes"
+        },
+        {
+          "value": false,
+          "text": "No"
+        }
+      ]
     }
   }
 }

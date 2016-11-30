@@ -4,6 +4,7 @@ import request from 'request';
 import jwt from 'jsonwebtoken';
 import { UnauthorizedError } from 'auth0-extension-tools';
 
+import logger from './logger';
 import config from './config';
 
 const BoxConstants = {
@@ -52,14 +53,25 @@ const getBoxId = (domain, user, token) => {
     .then(profile => profile && profile.app_metadata && profile.app_metadata.box_id);
 };
 
-export const getAppUserToken = (user, token) =>
+const getSigningCert = (signingCert, password) => {
+  if (password && password.length) {
+    return {
+      key: new Buffer(signingCert, 'base64').toString('ascii'),
+      passphrase: password
+    };
+  }
+
+  return new Buffer(signingCert, 'base64').toString('ascii');
+};
+
+export default (user, token) =>
   getBoxId(config('AUTH0_DOMAIN'), user, token)
     .then((boxId) => {
       if (!boxId || !boxId.length) {
         return Promise.reject(new UnauthorizedError('The current user does not have a boxId.'));
       }
 
-      const signingCert = new Buffer(config('BOX_SIGNING_CERT'), 'base64').toString('ascii');
+      const signingCert = getSigningCert(config('BOX_SIGNING_CERT'), config('BOX_SIGNING_CERT_PASSWORD'));
       const appUserToken = issueAppUserToken(config('BOX_PUBLIC_KEY_ID'), signingCert, config('BOX_CLIENT_ID'), boxId);
       const formData = {
         grant_type: BoxConstants.DEFAULT_SETTINGS.JWT_GRANT_TYPE,
@@ -67,17 +79,24 @@ export const getAppUserToken = (user, token) =>
         client_secret: config('BOX_CLIENT_SECRET'),
         assertion: appUserToken
       };
+
       return new Promise((resolve, reject) => {
-        request.post({ url: BoxConstants.BASE_URL, form: formData }, (err, res) => {
+        request.post({ url: BoxConstants.BASE_URL, form: formData, json: true }, (err, res) => {
           if (err) {
-            reject(err);
+            logger.error('Box Error:', JSON.stringify(err, null, 2));
+            return reject(err);
           }
 
           if (res.statusCode !== 200 || !res.body) {
-            return reject('Box Error:', (res.text || res.statusCode));
+            logger.error('Box Error:', JSON.stringify(res, null, 2));
+
+            const boxError = new Error(`${(res.body && res.body.error_description) || res.text || res.statusCode}`);
+            boxError.name = 'box_error';
+            boxError.status = res.statusCode;
+            return reject(boxError);
           }
 
-          const boxToken = JSON.parse(res.body);
+          const boxToken = res.body;
           boxToken.expires_at = Date.now() + 2700000;
           return resolve(boxToken);
         });

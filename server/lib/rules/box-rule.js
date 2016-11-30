@@ -3,8 +3,7 @@ module.exports = `/*
 */
 function(user, context, callback) {
    user.app_metadata = user.app_metadata || {};
-
-   if (!user.app_metadata.box_id || !user.app_metadata.boxId) {
+   if (!user.app_metadata.box_id) {
      var BoxConstants = {
        HEADERS: {
          V2_AUTH_ACCESS: "Bearer"
@@ -21,19 +20,21 @@ function(user, context, callback) {
      };
 
      var BoxConfig = {
-       clientId: configuration.clientId,
-       clientSecret: configuration.clientSecret,
-       enterpriseId: configuration.enterpriseId,
-       jwtPublicKeyId: configuration.jwtPublicKeyId
+       clientId: '<%= BOX_CLIENT_ID %>',
+       clientSecret: '<%= BOX_CLIENT_SECRET %>',
+       enterpriseId: '<%= BOX_ENTERPRISE_ID %>',
+       jwtPublicKeyId: '<%= BOX_PUBLIC_KEY_ID %>'
      };
 
-     var cert = new Buffer(configuration.cert, 'base64').toString('ascii');
+     var signingCert =  '<%= BOX_SIGNING_CERT %>';
+     var signingCertPassword = '<%= BOX_SIGNING_CERT_PASSWORD %>';
+     var cert = getSigningCert(signingCert, signingCertPassword);
 
      var jwtPackage = {
-       iss: BoxConfig.clientId,
+       iss: '<%= BOX_CLIENT_ID %>',
        aud: BoxConstants.BASE_URL,
        jti: uuid.v4(),
-       sub: BoxConfig.enterpriseId,
+       sub: '<%= BOX_ENTERPRISE_ID %>',
        box_sub_type: BoxConstants.ENTERPRISE,
        exp: Math.floor(Date.now() / 1000 + 30)
      };
@@ -43,7 +44,7 @@ function(user, context, callback) {
        privateKey: cert,
        header: {
          typ: BoxConstants.DEFAULT_SETTINGS.JWT_TYPE,
-         kid: BoxConfig.jwtPublicKeyId,
+         kid: '<%= BOX_PUBLIC_KEY_ID %>',
          alg: BoxConstants.DEFAULT_SETTINGS.JWT_ALGORITHM
        },
        payload: jwtPackage
@@ -51,14 +52,15 @@ function(user, context, callback) {
 
      var formData = {
        grant_type: BoxConstants.DEFAULT_SETTINGS.JWT_GRANT_TYPE,
-       client_id: BoxConfig.clientId,
-       client_secret: BoxConfig.clientSecret,
+       client_id: '<%= BOX_CLIENT_ID %>',
+       client_secret: '<%= BOX_CLIENT_SECRET %>',
        assertion: token
      };
 
      request.post({ url: BoxConstants.BASE_URL, form: formData }, function(err, resp) {
        if (err) {
-         callback(err);
+         console.log('Error authenticating to Box:', err);
+         return callback(err);
        }
 
        console.log('Retrieving Enterprise token...');
@@ -79,6 +81,7 @@ function(user, context, callback) {
          console.log('Creating a new app user...');
 
          if (err) {
+           console.log('Error creating Box App User:', err);
            return callback(err);
          }
 
@@ -89,5 +92,16 @@ function(user, context, callback) {
      });
    } else {
      callback(null, user, context);
+   }
+
+   function getSigningCert(cert, password) {
+     if (password && password.length) {
+       return {
+         key: new Buffer(cert, 'base64').toString('ascii'),
+         passphrase: password
+       };
+     }
+
+     return new Buffer(cert, 'base64').toString('ascii');
    }
 }`;

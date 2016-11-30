@@ -30,7 +30,11 @@ export default ({ config }) => {
             Content-Type: application/json<br />
             <br />
             {'{'}<br />
-            &nbsp;&nbsp;"expires_at": "..."<br />
+            &nbsp;&nbsp;"access_token": "iOGmxfpapeo9z0UINn04dpeOFpamddf3sF",<br />
+            &nbsp;&nbsp;"expires_in": 3650,<br />
+            &nbsp;&nbsp;"restricted_to": [ ],<br />
+            &nbsp;&nbsp;"token_type": "Bearer",<br />
+            &nbsp;&nbsp;"expires_at": 1480523945774<br />
             {'}'}<br />
           </code>
         </pre>
@@ -65,7 +69,11 @@ export default ({ config }) => {
           Content-Type: application/json<br />
           <br />
           {'{'}<br />
-          &nbsp;&nbsp;"expires_at": "..."<br />
+          &nbsp;&nbsp;"access_token": "iOGmxfpapeo9z0UINn04dpeOFpamddf3sF",<br />
+          &nbsp;&nbsp;"expires_in": 3650,<br />
+          &nbsp;&nbsp;"restricted_to": [ ],<br />
+          &nbsp;&nbsp;"token_type": "Bearer",<br />
+          &nbsp;&nbsp;"expires_at": 1480523945774<br />
           {'}'}<br />
         </code>
       </pre>
