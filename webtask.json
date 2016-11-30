@@ -3,7 +3,6 @@
   "name": "auth0-box-serverless",
   "version": "1.0.0",
   "author": "auth0",
-  "useHashName": false,
   "description": "Box Extension.",
   "type": "application",
   "docsUrl": "https://auth0.com/docs/extensions/box-serverless",
