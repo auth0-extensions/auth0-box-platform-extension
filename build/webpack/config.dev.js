@@ -2,7 +2,6 @@
 
 const webpack = require('webpack');
 const logger = require('../../server/lib/logger');
-logger.info('Running development configuration...');
 
 const WEBPACK_HOST = 'localhost';
 const WEBPACK_PORT = 3000;

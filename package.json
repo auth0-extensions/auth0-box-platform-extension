@@ -1,6 +1,6 @@
 {
   "name": "auth0-box-serverless-extension",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Auth0 Box Serverless Extension",
   "engines": {
     "node": "5.9.0"

@@ -3,9 +3,7 @@ import jwksRsa from 'jwks-rsa';
 import { UnauthorizedError } from 'auth0-extension-tools';
 
 export default (domain, audience, secret, isSecretEncoded) => {
-  console.log(domain, audience, secret, isSecretEncoded);
   if (secret && secret.length) {
-    console.log('HS256');
     return jwt({
       secret: isSecretEncoded ? new Buffer(secret, 'base64') : secret,
 
@@ -14,8 +12,11 @@ export default (domain, audience, secret, isSecretEncoded) => {
       issuer: `https://${domain}/`,
       algorithms: [ 'HS256' ],
 
-        // Optionally require authentication
-      credentialsRequired: true
+      // Optionally require authentication
+      credentialsRequired: true,
+
+      // Get the token from the body, this is not a bearer token.
+      getToken: (req) => req.body && req.body.token
     });
   }
 
@@ -34,12 +35,15 @@ export default (domain, audience, secret, isSecretEncoded) => {
       }
     }),
 
-      // Validate the audience and the issuer.
+    // Validate the audience and the issuer.
     audience,
     issuer: `https://${domain}/`,
     algorithms: [ 'RS256' ],
 
-      // Optionally require authentication
-    credentialsRequired: true
+    // Optionally require authentication
+    credentialsRequired: true,
+
+    // Get the token from the body, this is not a bearer token.
+    getToken: (req) => req.body && req.body.token
   });
 };

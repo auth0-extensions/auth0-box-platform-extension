@@ -1,10 +1,11 @@
 {
   "title": "Box Serverless",
   "name": "auth0-box-serverless",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": "auth0",
   "description": "Box Extension.",
   "type": "application",
+  "useHashName": false,
   "docsUrl": "https://auth0.com/docs/extensions/box-serverless",
   "logoUrl": "https://cdn.rawgit.com/auth0-extensions/auth0-box-serverless-extension/master/media/box.svg",
   "initialUrlPath": "/admins/login",

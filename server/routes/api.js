@@ -38,7 +38,7 @@ export default () => {
 
   const auth = authenticateUser(config('AUTH0_DOMAIN'), config('AUDIENCE'), config('SECRET'), config('SECRET_ENCODED'));
   api.post('/token', auth, (req, res, next) => {
-    getAppUserToken(req.user, req.headers.authorization.split(' ')[1])
+    getAppUserToken(req.user, req.body.token)
       .then(token => res.json(token))
       .catch(next);
   });
