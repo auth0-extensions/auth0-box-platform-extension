@@ -16,7 +16,7 @@ tools.urlHelpers.getBaseUrl = (req) => {
 };
 
 const createServer = tools.createServer((cfg, storage) => {
-  logger.info('Starting Box Serverless Extension - Version:', process.env.CLIENT_VERSION);
+  logger.info('Starting Box Platform Extension - Version:', process.env.CLIENT_VERSION);
   return expressApp(cfg, storage);
 });
 

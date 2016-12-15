@@ -25,11 +25,11 @@ export default () => {
       .getAll()
       .then(rules => {
         const payload = {
-          name: 'auth0-box-serverless',
-          script: compileRule(config, 'auth0-box-serverless')
+          name: 'auth0-box-platform',
+          script: compileRule(config, 'auth0-box-platform')
         };
 
-        const rule = _.find(rules, { name: 'auth0-box-serverless' });
+        const rule = _.find(rules, { name: 'auth0-box-platform' });
         if (rule) {
           return req.auth0.rules.update({ id: rule.id }, payload);
         }

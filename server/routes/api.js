@@ -14,7 +14,7 @@ export default () => {
     middlewares.authenticateAdmins({
       credentialsRequired: true,
       secret: config('EXTENSION_SECRET'),
-      audience: 'urn:box-serverless',
+      audience: 'urn:box-platform',
       baseUrl: config('PUBLIC_WT_URL')
     }),
     middlewares.managementApiClient({

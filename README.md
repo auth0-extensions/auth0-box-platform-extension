@@ -1,1 +1,1 @@
-# Auth0 Box Serverless Extension
+# Auth0 Box Platform Extension

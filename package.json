@@ -1,7 +1,7 @@
 {
-  "name": "auth0-box-serverless-extension",
-  "version": "1.0.3",
-  "description": "Auth0 Box Serverless Extension",
+  "name": "auth0-box-platform-extension",
+  "version": "1.0.0",
+  "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users",
   "engines": {
     "node": "5.9.0"
   },
@@ -11,7 +11,7 @@
     "clean": "rimraf dist",
     "client:build": "npm run clean && cross-env NODE_ENV=production webpack --config ./build/webpack/config.prod.js --colors -p",
     "extension:build": "webpack -p --config ./build/extension/webpack.config.js",
-    "extension:bundle": "cp ./dist/auth0-box-serverless.extension.$npm_package_version.js ./build/bundle.js",
+    "extension:bundle": "cp ./dist/auth0-box-platform.extension.$npm_package_version.js ./build/bundle.js",
     "extension:size": "cross-env NODE_ENV=production webpack -p --config ./build/extension/webpack.config.js --json > ./build/extension/bundle-size.json && node ./build/extension/bundle-size.js",
     "lint:js": "eslint --ignore-path .gitignore --ignore-pattern build --ignore-pattern webpack .",
     "serve:dev": "cross-env NODE_ENV=development gulp run --gulpfile ./build/gulpfile.js",

@@ -23,14 +23,15 @@ module.exports = (configProvider) => {
 
   // Configure routes.
   app.use(routes.dashboardAdmins({
+    stateKey: 'box-platform-state',
     secret: config('EXTENSION_SECRET'),
-    audience: 'urn:box-serverless',
+    audience: 'urn:box-platform',
     rta: config('AUTH0_RTA').replace('https://', ''),
     domain: config('AUTH0_DOMAIN'),
     baseUrl: config('PUBLIC_WT_URL'),
-    clientName: 'Box Serverless Extension',
+    clientName: 'Box Platform Extension',
     urlPrefix: '/admins',
-    sessionStorageKey: 'box-serverless:apiToken',
+    sessionStorageKey: 'box-platform:apiToken',
     scopes: 'read:clients read:resource_servers'
   }));
 

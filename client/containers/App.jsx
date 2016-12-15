@@ -44,7 +44,7 @@ export default RequireAuthentication(connectContainer(class App extends Componen
                         <a href={`${window.config.AUTH0_MANAGE_URL}/#/extensions`}>Extensions</a>
                       </li>
                     </ol>
-                    <h1 className="pull-left" style={{ paddingTop: '10px' }}>Box Serverless Integration</h1>
+                    <h1 className="pull-left" style={{ paddingTop: '10px' }}>Box Platform Integration</h1>
                   </div>
                 </div>
                 <Help config={this.props.config.get('record').toJS()} />
