@@ -50,7 +50,7 @@ const getBoxId = (domain, user, token) => {
   });
 
   return auth.tokens.getInfo(token)
-    .then(profile => profile && profile.app_metadata && profile.app_metadata.box_id);
+    .then(profile => profile && profile.app_metadata && profile.app_metadata.box_appuser_id);
 };
 
 const getSigningCert = (signingCert, password) => {

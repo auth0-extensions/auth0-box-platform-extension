@@ -3,7 +3,7 @@ module.exports = `/*
 */
 function(user, context, callback) {
    user.app_metadata = user.app_metadata || {};
-   if (!user.app_metadata.box_id) {
+   if (!user.app_metadata.box_appuser_id) {
      var BoxConstants = {
        HEADERS: {
          V2_AUTH_ACCESS: "Bearer"
@@ -63,7 +63,7 @@ function(user, context, callback) {
          return callback(err);
        }
 
-       console.log('Retrieving Enterprise token...');
+       console.log('Retrieving Box Enterprise token...');
 
        var enterpriseToken = JSON.parse(resp.body).access_token;
        var options = {
@@ -78,20 +78,21 @@ function(user, context, callback) {
        };
 
        request.post(options, function(err, resp) {
-         console.log('Creating a new app user...');
+         console.log('Creating a new Box App User...');
 
          if (err) {
            console.log('Error creating Box App User:', err);
            return callback(err);
          }
 
-         return auth0.users.updateAppMetadata(user.user_id, { box_id: resp.body.id }, function(err, updatedUser) {
+         console.log('Box App User created:', resp.body.id);
+         return auth0.users.updateAppMetadata(user.user_id, { box_appuser_id: resp.body.id }, function(err, updatedUser) {
            callback(null, updatedUser, context);
          });
        });
      });
    } else {
-     callback(null, user, context);
+     return callback(null, user, context);
    }
 
    function getSigningCert(cert, password) {
