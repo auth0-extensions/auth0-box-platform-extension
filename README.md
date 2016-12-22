@@ -47,10 +47,12 @@ Next, your user will login and get an `id_token`. This `id_token` can then be se
 Sample Requests:
 
 ```bash
+# As an example, we can use the Resource Owner endpoint to get an id_token
 curl -s "https://box-platform-demo.auth0.com/oauth/ro" \
   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
   -d 'client_id=fHJhSKk5njWpNhMgrCXI9RR64F1rqzPp&username=sandrino%2Bexample%40auth0.com&password=mypass&grant_type=password&scope=openid+name+email+nickname&connection=Username-Password-Authentication'
 
+# We send the id_token to the Webtask endpoint and get a Box Platform access token back
 curl -s 'https://box-platform-demo.us.webtask.io/auth0-box-platform/api/token' \
   -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{ "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik9EYzBPRE5FUTBZek5VSTBNRFEzTVVJelJrSTFNMEpDUVVSRU5URXpSRFUyUlVVM1JqZzVPQSJ9.eyJuYW1lIjoic2FuZHJpbm8rZXhhbXBsZUBhdXRoMC5jb20iLCJlbWFpbCI6InNhbmRyaW5vK2V4YW1wbGVAYXV0aDAuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuaWNrbmFtZSI6InNhbmRyaW5vK2V4YW1wbGUiLCJpc3MiOiJodHRwczovL2JveC1wbGF0Zm9ybS1kZW1vLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ODVjNGE5NDc1NDdmNDJmZTRmOTJjZGYiLCJhdWQiOiJmSEpoU0trNW5qV3BOaE1nckNYSTlSUjY0RjFycXpQcCIsImV4cCI6MTQ4MjQ3OTg4MCwiaWF0IjoxNDgyNDQzODgwfQ.a3_i5GSqaPOjHiy5NAtcrd2Dn5Q1vHwyedrb5QrxjBWFN2KDVCoVrmWYeYsxVPyexisU9u_vM6Bs8fVDTQcFgG8NLpIt1RgFy9dEGWN5rfDiPFppD-MkAQgIjG563f8nwkesYGZPO6QPyNbaU94P1WN1Zq1TaJHz356BWUqEtc8vzjbVt6nLEPgIEZNhIYTqKAE6wrVjHvTe2yDqnH4IaiA0-oeJaY1QEeFusWWScJ6VYxnBmKZRHXKDbRzKfaJwYZDy6CISISTV_tY0epCTG8jwM57P6ERATgch993xrH2Dew2ExyHaB6R9atpyAyoCIp9ZZhWQzvWaIiFIqcV-xw" }'
 ```
