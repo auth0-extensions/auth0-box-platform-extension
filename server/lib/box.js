@@ -79,9 +79,9 @@ export const getEnterpriseToken = () => {
     {
       header: {
         typ: BoxConstants.DEFAULT_SETTINGS.JWT_TYPE,
-        kid: config('BOX_PUBLIC_KEY_ID'),
-        alg: BoxConstants.DEFAULT_SETTINGS.JWT_ALGORITHM
-      }
+        kid: config('BOX_PUBLIC_KEY_ID')
+      },
+      algorithm: BoxConstants.DEFAULT_SETTINGS.JWT_ALGORITHM
     }
   );
 
