@@ -1,11 +1,11 @@
 {
   "title": "Box Platform",
   "name": "auth0-box-platform",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "useHashName": false,
   "author": "auth0",
   "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users",
   "type": "application",
-  "useHashName": false,
   "docsUrl": "https://auth0.com/docs/extensions/box-platform",
   "logoUrl": "https://cdn.rawgit.com/auth0-extensions/auth0-box-platform-extension/master/media/box.svg",
   "initialUrlPath": "/admins/login",
@@ -23,6 +23,31 @@
     "scopes": "read:clients delete:clients read:rules create:rules update:rules delete:rules"
   },
   "secrets": {
+    "AUTH0_AUDIENCE": {
+      "description": "The Auth0 Client ID of your application.",
+      "required": true
+    },
+    "AUTH0_SECRET": {
+      "description": "If you're using a client with HS256, then you would need to enter your Auth0 Client Secret here.",
+      "required": false
+    },
+    "AUTH0_SECRET_ENCODED": {
+      "description": "Is your Auth0 Client Secret base64 encoded?",
+      "type": "select",
+      "required": false,
+      "default": "false",
+      "allowMultiple": false,
+      "options": [
+        {
+          "value": "true",
+          "text": "Yes"
+        },
+        {
+          "value": "false",
+          "text": "No"
+        }
+      ]
+    },
     "BOX_CLIENT_ID": {
       "description": "Your Box Client ID",
       "example": "i3ja4fpame94fnwapeffqlenepep",
@@ -44,41 +69,16 @@
       "example": "xp39apxie",
       "required": true
     },
-    "BOX_SIGNING_CERT": {
+    "BOX_PRIVATE_KEY": {
       "description": "The base64 encoded signing certificate.",
       "required": true,
       "type": "password"
     },
-    "BOX_SIGNING_CERT_PASSWORD": {
+    "BOX_PRIVATE_KEY_PASSWORD": {
       "description": "The password for your singing certificate (optional).",
       "example": "my-pass",
       "required": false,
       "type": "password"
-    },
-    "AUDIENCE": {
-      "description": "Your Auth0 Client ID",
-      "required": true
-    },
-    "SECRET": {
-      "description": "If you're using a client with HS256, then you would need to enter your Auth0 Client Secret here.",
-      "required": false
-    },
-    "SECRET_ENCODED": {
-      "description": "Is the signing certificate base64 encoded?",
-      "type": "select",
-      "required": false,
-      "default": true,
-      "allowMultiple": false,
-      "options": [
-        {
-          "value": true,
-          "text": "Yes"
-        },
-        {
-          "value": false,
-          "text": "No"
-        }
-      ]
     }
   }
 }

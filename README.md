@@ -6,7 +6,7 @@
 
 Start by creating a Client in your Auth0 account. This client will for example represent your iOS app that will upload pictures to the Box platform.
 
-Write down the **Client ID** and **Client Secret** and also if the secret is encoded or not. If you're using RS256 with your client, then only the **Client ID** is required. 
+Write down the **Client ID** and **Client Secret** and also if the secret is encoded or not. If you're using RS256 with your client, then only the **Client ID** is required.
 
 ### Installation
 
@@ -20,10 +20,10 @@ Click **CREATE EXTENSION** and install the extension from this repository: https
 
 Finally enter your Box and Auth0 settings:
 
- - `AUDIENCE`: The Client ID from the first step.
- - `SECRET`: The Client Secret from the first step if you're using HS256.
- - `SECRET_ENCODED`: If the Client Secret is encoded or not (from step 1).
- 
+ - `AUTH0_AUDIENCE`: The Client ID from the first step.
+ - `AUTH0_SECRET`: The Client Secret from the first step if you're using HS256.
+ - `AUTH0_SECRET_ENCODED`: If the Client Secret is encoded or not (from step 1).
+
 ![](/media/step3-enter-settings.png)
 
 You can now open the extension which will now show instructions on how it can be used:
