@@ -92,6 +92,7 @@ export const getEnterpriseToken = () => {
     assertion: token
   };
 
+  logger.info('Getting Box Enterprise token...');
   return new Promise((resolve, reject) => {
     request.post({ url: BoxConstants.BASE_URL, form: formData, json: true }, (err, res, body) => {
       if (err) {
@@ -127,6 +128,8 @@ export const provisionAppUser = (user) =>
         }
       };
 
+
+      logger.info('Provisioning Box App User...');
       return new Promise((resolve, reject) => {
         request.post(options, (err, res, body) => {
           if (err) {
