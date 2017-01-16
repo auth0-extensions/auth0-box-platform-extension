@@ -26,6 +26,8 @@ Finally enter your Box and Auth0 settings:
 
 ![](/media/step3-enter-settings.png)
 
+> Note: Make sure your Box private key file is base64 encoded: `cat thefile.pem | base64`
+
 You can now open the extension which will now show instructions on how it can be used:
 
 ![](/media/step4-box-platform-homepage.png)
