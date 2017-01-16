@@ -76,7 +76,7 @@
       "type": "password"
     },
     "BOX_PRIVATE_KEY_PASSWORD": {
-      "description": "The password for your singing certificate (optional).",
+      "description": "The password for your signing certificate (optional).",
       "example": "my-pass",
       "required": false,
       "type": "password"
