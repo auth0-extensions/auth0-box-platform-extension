@@ -184,7 +184,6 @@ export const getAppUserToken = (user, token) =>
           }
 
           const boxToken = body;
-          boxToken.expires_at = Date.now() + 2700000;
           return resolve(boxToken);
         });
       });
