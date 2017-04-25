@@ -36,7 +36,7 @@ export default () => {
   const whitelist = (config('CORS_WHITELIST') || '').split(',');
   const corsOptions = {
     origin(origin, callback) {
-      if (!whitelist || !whitelist.length || whitelist.indexOf(origin) !== -1 || (whitelist.length === 1 && whitelist[0] === '*')) {
+      if (!origin || origin.length === 0 || whitelist.indexOf(origin) !== -1 || (whitelist.length === 1 && whitelist[0] === '*')) {
         callback(null, true);
       } else {
         callback(new UnauthorizedError(`Origin "${origin}" allowed by CORS`));
