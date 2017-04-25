@@ -24,7 +24,7 @@ export default () => {
     res.json({
       domain: config('AUTH0_DOMAIN'),
       audience: process.env.API_AUDIENCE || config('API_AUDIENCE'),
-      tokenEndpoint: path.join(config('WT_URL'), '/delegation')
+      tokenEndpoint: path.join(config('PUBLIC_WT_URL'), '/delegation')
           .replace('http:/', 'http://')
           .replace('https:/', 'https://')
     });

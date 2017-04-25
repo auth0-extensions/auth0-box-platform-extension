@@ -32,3 +32,25 @@ npm run serve:dev
 Note: if you plan to call the extension from the browser you'll need to configure the `CORS_WHITELIST` with the proper origins, eg: `http://localhost:7001,http://localhost:7002`
 
 After installing the Box Platform Extension you can look at the [examples](/examples) to understand how you can use the Box Platform in combination with Auth0.
+
+### Restricting Access
+
+By default every Client in your Auth0 account is able to request a Box Platform token. If you want to restrict this to specific clients you can create a rule that runs before the `auth0-box-platform` rule:
+
+```js
+function (user, context, callback) {
+  if (context.clientID === 'YOUR_CLIENT_ID') {
+    return callback(null, user, context);
+  }
+
+  var boxAudience = 'urn:box-platform-api';
+  if (context.request.query && context.request.query.audience === boxAudience) {
+    return callback(new UnauthorizedError('Client is not authorized to make this call'));
+  }
+  if (context.request.body && context.request.body.audience === boxAudience) {
+    return callback(new UnauthorizedError('Client is not authorized to make this call'));
+  }
+
+  return callback(null, user, context);
+}
+```
