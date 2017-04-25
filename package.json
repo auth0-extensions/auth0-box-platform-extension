@@ -1,6 +1,6 @@
 {
   "name": "auth0-box-platform-extension",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users",
   "engines": {
     "node": "5.9.0"

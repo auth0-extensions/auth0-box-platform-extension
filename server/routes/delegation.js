@@ -36,10 +36,10 @@ export default () => {
   const whitelist = (config('CORS_WHITELIST') || '').split(',');
   const corsOptions = {
     origin(origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
+      if (whitelist.indexOf(origin) !== -1 || (whitelist.length === 1 && whitelist[0] === '*')) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new UnauthorizedError(`Origin "${origin}" allowed by CORS`));
       }
     }
   };

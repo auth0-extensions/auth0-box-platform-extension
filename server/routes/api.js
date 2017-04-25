@@ -1,6 +1,6 @@
 import path from 'path';
 import { Router } from 'express';
-import { urlHelpers, middlewares } from 'auth0-extension-express-tools';
+import { middlewares } from 'auth0-extension-express-tools';
 
 import config from '../lib/config';
 import { provisionAppUser } from '../lib/box';
