@@ -1,0 +1,24 @@
+{
+  "name": "auth0-box-jquery-webtask",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "build": "a0-ext build:server ./webtask.js ./build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Auth0",
+  "auth0-extension": {
+    "externals": [
+      "ejs@2.3.1",
+      "express@4.14.0",
+      "webtask-tools"
+    ]
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "2.3.1",
+    "express": "4.14.0",
+    "morgan": "1.5.3",
+    "webtask-tools": "^3.2.0"
+  }
+}
