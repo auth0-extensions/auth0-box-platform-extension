@@ -1,7 +1,7 @@
 {
   "title": "Box Platform",
   "name": "auth0-box-platform",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "useHashName": false,
   "author": "auth0",
   "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users",
@@ -20,66 +20,20 @@
     "createClient": true,
     "onInstallPath": "/.extensions/on-install",
     "onUninstallPath": "/.extensions/on-uninstall",
-    "scopes": "read:clients delete:clients read:rules create:rules update:rules delete:rules"
+    "scopes": "read:resource_servers delete:resource_servers create:resource_servers read:clients delete:clients read:rules create:rules update:rules delete:rules"
   },
   "secrets": {
-    "AUTH0_AUDIENCE": {
-      "description": "The Auth0 Client ID of your application.",
-      "required": true
-    },
-    "AUTH0_SECRET": {
-      "description": "If you're using a client with HS256, then you would need to enter your Auth0 Client Secret here.",
-      "required": false,
-      "type": "password"
-    },
-    "AUTH0_SECRET_ENCODED": {
-      "description": "Is your Auth0 Client Secret base64 encoded?",
-      "type": "select",
-      "required": false,
-      "default": "false",
-      "allowMultiple": false,
-      "options": [
-        {
-          "value": "true",
-          "text": "Yes"
-        },
-        {
-          "value": "false",
-          "text": "No"
-        }
-      ]
-    },
-    "BOX_CLIENT_ID": {
-      "description": "Your Box Client ID",
-      "example": "i3ja4fpame94fnwapeffqlenepep",
-      "required": true
-    },
-    "BOX_CLIENT_SECRET": {
-      "description": "Your Box Client Secret",
-      "example": "mZj2fpwpwbbiepepBofeappfoe9929294949",
+    "BOX_SETTINGS_FILE": {
       "required": true,
-      "type": "password"
+      "type": "file",
+      "description": "The appSettings file for your Box Client which you can download from the Developer Console.",
+      "allowedFileTypes": ".json",
+      "base64Encoded": false
     },
-    "BOX_ENTERPRISE_ID": {
-      "description": "Your Box Enterprise ID",
-      "example": "111111",
-      "required": true
-    },
-    "BOX_PUBLIC_KEY_ID": {
-      "description": "The ID of your Public Key in Box",
-      "example": "xp39apxie",
-      "required": true
-    },
-    "BOX_PRIVATE_KEY": {
-      "description": "The base64 encoded signing certificate.",
-      "required": true,
-      "type": "password"
-    },
-    "BOX_PRIVATE_KEY_PASSWORD": {
-      "description": "The password for your signing certificate (optional).",
-      "example": "my-pass",
-      "required": false,
-      "type": "password"
+    "CORS_WHITELIST": {
+      "description": "Specify the origins which are allowed to call the extension from the browser",
+      "example": "http://localhost:7001,http://localhost:7002",
+      "required": false
     }
   }
 }

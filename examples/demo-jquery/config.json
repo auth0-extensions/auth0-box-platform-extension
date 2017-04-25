@@ -1,0 +1,5 @@
+{
+  "AUTH0_DOMAIN": "you.auth0.com",
+  "AUTH0_CLIENT_ID": "gKYI3eXfKZ.........",
+  "BOX_DELEGATION_ENDPOINT": "https://......../delegation"
+}

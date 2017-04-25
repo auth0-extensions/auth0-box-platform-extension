@@ -10,6 +10,7 @@ import api from './routes/api';
 import meta from './routes/meta';
 import hooks from './routes/hooks';
 import htmlRoute from './routes/html';
+import delegation from './routes/delegation';
 
 module.exports = (configProvider) => {
   config.setProvider(configProvider);
@@ -38,6 +39,7 @@ module.exports = (configProvider) => {
   // Configure routes.
   app.use('/api', api());
   app.use('/app', Express.static(path.join(__dirname, '../dist')));
+  app.use('/delegation', delegation());
   app.use('/meta', meta());
   app.use('/.extensions', hooks());
 

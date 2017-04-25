@@ -1,25 +1,22 @@
 'use strict';
 
 const webpack = require('webpack');
-const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 
 const project = require('../../package.json');
+const config = require('./config.base.js');
 const logger = require('../../server/lib/logger');
+
 logger.info('Running production configuration...');
 
-const config = require('./config.base.js');
+const version = process.env.EXTENSION_VERSION || project.version;
+
 config.profile = false;
 
 // Build output, which includes the hash.
 config.output.hash = true;
-config.output.filename = `auth0-box-platform.ui.${project.version}.js`;
-
-// Development modules.
-config.module.loaders.push({
-  test: /\.css$/,
-  loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-});
+config.output.filename = `auth0-box-platform.ui.${version}.js`;
 
 // Webpack plugins.
 config.plugins = config.plugins.concat([
@@ -27,12 +24,12 @@ config.plugins = config.plugins.concat([
   new webpack.optimize.DedupePlugin(),
 
   // Extract CSS to a different file, will require additional configuration.
-  new ExtractTextPlugin(`auth0-box-platform.ui.${project.version}.css`, {
+  new ExtractTextPlugin(`auth0-box-platform.ui.${version}.css`, {
     allChunks: true
   }),
 
   // Separate the vender in a different file.
-  new webpack.optimize.CommonsChunkPlugin('vendors', `auth0-box-platform.ui.vendors.${project.version}.js`),
+  new webpack.optimize.CommonsChunkPlugin('vendors', `auth0-box-platform.ui.vendors.${version}.js`),
 
   // Compress and uglify the output.
   new webpack.optimize.UglifyJsPlugin({

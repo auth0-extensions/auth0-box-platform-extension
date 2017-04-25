@@ -48,7 +48,7 @@ module.exports = {
     modulesDirectories: [
       'node_modules'
     ],
-    extensions: [ '', '.json', '.js', '.jsx' ]
+    extensions: [ '', '.json', '.js', '.jsx', '.styl' ]
   },
 
   // Load all modules.
@@ -66,6 +66,14 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot)/,
         loader: 'url?limit=100000'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader'
       }
     ]
   },
@@ -98,5 +106,12 @@ module.exports = {
     require('postcss-reporter')({
       clearMessages: true
     })
-  ]
+  ],
+
+  stylus: {
+    import: [
+      '~auth0-styleguide-core/src/vars/index.styl'
+    ]
+  }
+
 };

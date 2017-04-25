@@ -1,5 +1,4 @@
 import uuid from 'uuid';
-import auth0 from 'auth0';
 import request from 'request';
 import jwt from 'jsonwebtoken';
 import { UnauthorizedError } from 'auth0-extension-tools';
@@ -43,35 +42,50 @@ const issueAppUserToken = (publicKeyId, signingCert, boxClientId, boxId) => jwt.
   }
 );
 
-const getBoxId = (domain, user, token) => {
-  const auth = new auth0.AuthenticationClient({
-    clientId: user.azp || user.aud,
-    domain
-  });
-
-  return auth.tokens.getInfo(token)
-    .then(profile => profile && profile.app_metadata && profile.app_metadata.box_appuser_id);
-};
+const getBoxId = user => Promise.resolve(user && user['http://box-platform/appuser/id']);
 
 const getSigningCert = (signingCert, password) => {
   if (password && password.length) {
     return {
-      key: new Buffer(signingCert, 'base64').toString('ascii'),
+      key: signingCert,
       passphrase: password
     };
   }
 
-  return new Buffer(signingCert, 'base64').toString('ascii');
+  return signingCert;
+};
+
+export const settings = () => {
+  try {
+    const boxSettings = JSON.parse(config('BOX_SETTINGS_FILE'));
+    return {
+      boxAppSettings: {
+        clientID: boxSettings && boxSettings.boxAppSettings && boxSettings.boxAppSettings.clientID,
+        clientSecret: boxSettings && boxSettings.boxAppSettings && boxSettings.boxAppSettings.clientSecret,
+        appAuth: {
+          publicKeyID: boxSettings && boxSettings.boxAppSettings && boxSettings.boxAppSettings.appAuth && boxSettings.boxAppSettings.appAuth.publicKeyID,
+          privateKey: boxSettings && boxSettings.boxAppSettings && boxSettings.boxAppSettings.appAuth && boxSettings.boxAppSettings.appAuth.privateKey,
+          passphrase: boxSettings && boxSettings.boxAppSettings && boxSettings.boxAppSettings.appAuth && boxSettings.boxAppSettings.appAuth.passphrase
+        }
+      },
+      enterpriseID: boxSettings.enterpriseID
+    };
+  } catch (e) {
+    logger.error(e);
+    return {
+
+    };
+  }
 };
 
 export const getEnterpriseToken = () => {
-  const signingCert = getSigningCert(config('BOX_PRIVATE_KEY'), config('BOX_PRIVATE_KEY_PASSWORD'));
+  const signingCert = getSigningCert(settings().boxAppSettings.appAuth.privateKey, settings().boxAppSettings.appAuth.passphrase);
   const token = jwt.sign(
     {
-      iss: config('BOX_CLIENT_ID'),
+      iss: settings().boxAppSettings.clientID,
       aud: BoxConstants.BASE_URL,
       jti: uuid.v4(),
-      sub: config('BOX_ENTERPRISE_ID'),
+      sub: settings().enterpriseID,
       box_sub_type: BoxConstants.ENTERPRISE,
       exp: Math.floor((Date.now() / 1000) + 30)
     },
@@ -79,7 +93,7 @@ export const getEnterpriseToken = () => {
     {
       header: {
         typ: BoxConstants.DEFAULT_SETTINGS.JWT_TYPE,
-        kid: config('BOX_PUBLIC_KEY_ID')
+        kid: settings().boxAppSettings.appAuth.publicKeyID
       },
       algorithm: BoxConstants.DEFAULT_SETTINGS.JWT_ALGORITHM
     }
@@ -87,8 +101,8 @@ export const getEnterpriseToken = () => {
 
   const formData = {
     grant_type: BoxConstants.DEFAULT_SETTINGS.JWT_GRANT_TYPE,
-    client_id: config('BOX_CLIENT_ID'),
-    client_secret: config('BOX_CLIENT_SECRET'),
+    client_id: settings().boxAppSettings.clientID,
+    client_secret: settings().boxAppSettings.clientSecret,
     assertion: token
   };
 
@@ -114,9 +128,9 @@ export const getEnterpriseToken = () => {
   });
 };
 
-export const provisionAppUser = (user) =>
+export const provisionAppUser = user =>
   getEnterpriseToken()
-    .then(enterpriseToken => {
+    .then((enterpriseToken) => {
       const options = {
         headers: {
           Authorization: `Bearer ${enterpriseToken}`
@@ -151,19 +165,19 @@ export const provisionAppUser = (user) =>
       });
     });
 
-export const getAppUserToken = (user, token) =>
-  getBoxId(config('AUTH0_DOMAIN'), user, token)
+export const getAppUserToken = user =>
+  getBoxId(user)
     .then((boxId) => {
       if (!boxId || !boxId.length) {
         return Promise.reject(new UnauthorizedError('The current user does not have a boxId.'));
       }
 
-      const signingCert = getSigningCert(config('BOX_PRIVATE_KEY'), config('BOX_PRIVATE_KEY_PASSWORD'));
-      const appUserToken = issueAppUserToken(config('BOX_PUBLIC_KEY_ID'), signingCert, config('BOX_CLIENT_ID'), boxId);
+      const signingCert = getSigningCert(settings().boxAppSettings.appAuth.privateKey, settings().boxAppSettings.appAuth.passphrase);
+      const appUserToken = issueAppUserToken(settings().boxAppSettings.appAuth.publicKeyID, signingCert, settings().boxAppSettings.clientID, boxId);
       const formData = {
         grant_type: BoxConstants.DEFAULT_SETTINGS.JWT_GRANT_TYPE,
-        client_id: config('BOX_CLIENT_ID'),
-        client_secret: config('BOX_CLIENT_SECRET'),
+        client_id: settings().boxAppSettings.clientID,
+        client_secret: settings().boxAppSettings.clientSecret,
         assertion: appUserToken
       };
 

@@ -23,12 +23,6 @@ config.stats = {
   reasons: true
 };
 
-// Development modules.
-config.module.loaders.push({
-  test: /\.css$/,
-  loader: 'style-loader!css-loader!postcss-loader'
-});
-
 // Webpack plugins.
 config.plugins = config.plugins.concat([
   new webpack.HotModuleReplacementPlugin()
