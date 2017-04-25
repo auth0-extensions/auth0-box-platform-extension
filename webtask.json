@@ -1,10 +1,10 @@
 {
   "title": "Box Platform",
   "name": "auth0-box-platform",
-  "version": "1.2.5",
+  "version": "0.9.0",
   "useHashName": false,
   "author": "auth0",
-  "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users",
+  "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users using the Box Platform (https://developer.box.com/)",
   "type": "application",
   "docsUrl": "https://auth0.com/docs/extensions/box-platform",
   "logoUrl": "https://cdn.auth0.com/extensions/auth0-box-platform/assets/box.svg",
@@ -26,7 +26,7 @@
     "BOX_SETTINGS_FILE": {
       "required": true,
       "type": "file",
-      "description": "The appSettings file for your Box Client which you can download from the Developer Console.",
+      "description": "The appSettings file for your Box Platform Client which you can download from the Developer Console.",
       "allowedFileTypes": ".json",
       "base64Encoded": false
     },

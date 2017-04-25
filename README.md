@@ -25,9 +25,13 @@ npm run serve:dev
 
 ## Usage
 
- 1. Go to the [Box Developer Console](https://app.box.com/developers/console) and download the "App Settings" (make sure you generate a key pair first)
- 2. Authorize the Client ID of your Box Application in the [Admin Console](https://app.box.com/master/settings/openbox)
- 3. Install the Extension
+ 1. Go to the [Box Developer Console](https://app.box.com/developers/console) and go to the **Configuration** tab for your App
+ 2. Enable "OAuth 2.0 with JWT (Server Authentication)"
+ 3. Generate a Pubic/Private Keypair
+ 4. Optionally configure the CORS Domains if you plan to call the Box Platform from the browser (eg: `http://localhost:7001`)
+ 5. Download the "App Settings" as a JSON file
+ 6. Authorize the Client ID of your Box Application in the [Admin Console](https://app.box.com/master/settings/openbox)
+ 7. Install the Extension
 
 Note: if you plan to call the extension from the browser you'll need to configure the `CORS_WHITELIST` with the proper origins, eg: `http://localhost:7001,http://localhost:7002`
 
