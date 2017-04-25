@@ -295,9 +295,9 @@ auth0-extension-ui@1.0.1:
     path "^0.12.7"
     stylus-loader "^2.3.1"
 
-auth0-extensions-cli@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/auth0-extensions-cli/-/auth0-extensions-cli-1.0.3.tgz#b4a86cc844d9ee68d634355d570bb438982700bd"
+auth0-extensions-cli@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/auth0-extensions-cli/-/auth0-extensions-cli-1.0.5.tgz#32b7c2a83349fc0bb3e65092d6d530dc0bf2ce8e"
   dependencies:
     async "^2.2.0"
     babel-core "^6.24.0"
@@ -1303,13 +1303,13 @@ babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^
   dependencies:
     regenerator-transform "0.9.11"
 
-babel-plugin-transform-runtime@^6.23.0, babel-plugin-transform-runtime@^6.7.5:
+babel-plugin-transform-runtime@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-runtime@^6.9.0:
+babel-plugin-transform-runtime@^6.7.5, babel-plugin-transform-runtime@^6.9.0:
   version "6.15.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.15.0.tgz#3d75b4d949ad81af157570273846fb59aeb0d57c"
   dependencies:
@@ -4951,13 +4951,13 @@ lodash@3.10.1, lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.13.1, lodash@^4.16.2, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.9.0:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
-
-lodash@^4.14.0, lodash@^4.15.0, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1, lodash@^4.9.0:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
+
+lodash@^4.13.1, lodash@^4.17.4:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 lodash@~1.0.1:
   version "1.0.2"
@@ -6831,7 +6831,7 @@ request-promise@^4.2.0:
     request-promise-core "1.1.1"
     stealthy-require "^1.0.0"
 
-request@^2.34, request@^2.72.0, request@^2.73.0, request@^2.75.0:
+request@^2.34, request@^2.55.0, request@^2.72.0, request@^2.73.0, request@^2.75.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -6856,7 +6856,7 @@ request@^2.34, request@^2.72.0, request@^2.73.0, request@^2.75.0:
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
 
-request@^2.55.0, request@^2.81.0:
+request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
