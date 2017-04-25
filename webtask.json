@@ -7,7 +7,7 @@
   "description": "The Box Platform Extension allows you to integrate Auth0 with your Box App Users",
   "type": "application",
   "docsUrl": "https://auth0.com/docs/extensions/box-platform",
-  "logoUrl": "https://cdn.rawgit.com/auth0-extensions/auth0-box-platform-extension/master/media/box.svg",
+  "logoUrl": "https://cdn.auth0.com/extensions/auth0-box-platform/assets/box.svg",
   "initialUrlPath": "/admins/login",
   "uninstallConfirmMessage": "Do you really want to uninstall this extension? Doing so will also remove the rule and the token endpoint.",
   "repository": "https://github.com/auth0-extensions/auth0-box-platform-extension",
