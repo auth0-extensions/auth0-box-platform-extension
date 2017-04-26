@@ -25,6 +25,8 @@ npm run serve:dev
 
 ## Usage
 
+![](/media/installation.gif)
+
  1. Go to the [Box Developer Console](https://app.box.com/developers/console) and go to the **Configuration** tab for your App
  2. Enable "OAuth 2.0 with JWT (Server Authentication)"
  3. Generate a Pubic/Private Keypair
