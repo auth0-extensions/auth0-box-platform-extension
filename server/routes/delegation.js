@@ -33,19 +33,28 @@ export default () => {
     credentialsRequired: true
   });
 
+  const checkScope = scope =>
+    (req, res, next) => {
+      if (req.user.scope && req.user.scope.indexOf(scope) >= 0) {
+        return next();
+      }
+
+      return next(new UnauthorizedError(`Insufficient scopes. Scope "${scope}" is required.`));
+    };
+
   const whitelist = (config('CORS_WHITELIST') || '').split(',');
   const corsOptions = {
     origin(origin, callback) {
       if (!origin || origin.length === 0 || whitelist.indexOf(origin) !== -1 || (whitelist.length === 1 && whitelist[0] === '*')) {
         callback(null, true);
       } else {
-        callback(new UnauthorizedError(`Origin "${origin}" allowed by CORS`));
+        callback(new UnauthorizedError(`Origin "${origin}" is not allowed by CORS`));
       }
     }
   };
 
   const delegation = router();
-  delegation.get('/', cors(corsOptions), authorize, (req, res, next) => {
+  delegation.get('/', cors(corsOptions), authorize, checkScope('get:token'), (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     getAppUserToken(req.user, token)
       .then(boxToken => res.json(boxToken))

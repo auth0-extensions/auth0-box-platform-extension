@@ -6,7 +6,7 @@ import config from '../../server/lib/config';
 module.exports.wellKnownEndpoint = (domain, cert, kid) =>
    nock(`https://${domain}`)
     .get('/.well-known/jwks.json')
-    .times(2)
+    .times(3)
     .reply(200, {
       keys: [
         {
@@ -24,11 +24,12 @@ module.exports.sign = (cert, kid, payload) =>
    jwt.sign(payload, cert, { header: { kid }, algorithm: 'RS256' })
 ;
 
-module.exports.getToken = (boxId) => {
+module.exports.getToken = (scope, boxId) => {
   const data = {
     iss: `https://${config('AUTH0_DOMAIN')}/`,
     aud: 'urn:auth0-authz-api',
-    sub: 'foo'
+    sub: 'foo',
+    scope
   };
 
   if (boxId) {
